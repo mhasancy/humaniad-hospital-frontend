@@ -1,7 +1,6 @@
 //imported file
-import DeleteIcon from "@mui/icons-material/Delete";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import { IconButton, Typography } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { IconButton } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,12 +14,12 @@ import { Box } from "@mui/system";
 import * as React from "react";
 import useAuth from "../../../hooks/useAuth";
 
-//manage orders component
+//MyOrders component
 const ManageAppointment = () => {
+  //destructuring data from useAuth
   const { dataContext } = useAuth();
-  //destructuring
-  const { ordersData, deleteOrder, handleStatusUpdate } = dataContext;
-  const rows = ordersData;
+
+  const { deleteAppointment, appointmentsData } = dataContext;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -33,14 +32,12 @@ const ManageAppointment = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  //filtering my orders data
+  console.log(appointmentsData);
 
+  const rows = appointmentsData;
   return (
-    <Box>
-      <Typography component="h1" variant="h4">
-        Manage All Orders
-      </Typography>
-      <br />
-
+    <Box style={{ marginTop: "30px" }}>
       <Paper
         className="container"
         sx={{ maxWidth: "85vw", overflow: "hidden" }}
@@ -53,8 +50,9 @@ const ManageAppointment = () => {
           >
             <TableHead>
               <TableRow>
-                <TableCell>Product Info</TableCell>
-                <TableCell>Order Info</TableCell>
+                <TableCell>Appointment By</TableCell>
+                <TableCell>Doctor Name</TableCell>
+                <TableCell>Date</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Action</TableCell>
               </TableRow>
@@ -62,49 +60,30 @@ const ManageAppointment = () => {
 
             <TableBody>
               {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(
-                  ({
-                    _id,
-                    name,
-                    email,
-                    cell,
-                    address,
-                    productTitle,
-                    productId,
-                    status,
-                    price,
-                  }) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={_id}>
-                        <TableCell>
-                          <strong> Title:</strong> {productTitle} <br />
-                          <strong> Price: $</strong> {price}
-                        </TableCell>
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map(({ _id, name, email, status, cell, date, doctor }) => {
+                  console.log(name);
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={_id}>
+                      <TableCell>
+                        <strong> Name:</strong> {name} <br />
+                        <strong> Email: </strong> {email} <br />
+                        <strong> Cell: </strong> {cell}
+                      </TableCell>
+                      <TableCell>{doctor}</TableCell>
 
-                        <TableCell align="left">
-                          <strong> Name:</strong> {name} <br />
-                          <strong> Email:</strong> email: {email} <br />
-                          <strong> Cell:</strong> {cell} <br />
-                          <strong> Address:</strong> {address}
-                        </TableCell>
-                        <TableCell align="left">{status}</TableCell>
-                        <TableCell align="left">
-                          <Tooltip title="Delete" arrow>
-                            <IconButton onClick={() => deleteOrder(_id)}>
-                              <DeleteIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Mark Shipped" arrow>
-                            <IconButton onClick={() => handleStatusUpdate(_id)}>
-                              <LocalShippingIcon />
-                            </IconButton>
-                          </Tooltip>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  }
-                )}
+                      <TableCell align="left">{date}</TableCell>
+                      <TableCell align="left">{status}</TableCell>
+                      <TableCell align="left">
+                        <Tooltip title="Cancel" arrow>
+                          <IconButton onClick={() => deleteAppointment(_id)}>
+                            <CancelIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -122,4 +101,5 @@ const ManageAppointment = () => {
     </Box>
   );
 };
+
 export default ManageAppointment;

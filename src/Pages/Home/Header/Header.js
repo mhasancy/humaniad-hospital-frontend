@@ -52,11 +52,7 @@ const Header = () => {
                     </NavLink>
                   </li>
                 )}
-                <li style={navItemCol} className="nav-item">
-                  <NavLink to="/department" className="nav-link">
-                    Department
-                  </NavLink>
-                </li>
+
                 <li style={navItemCol} className="nav-item">
                   <NavLink to="/services" className="nav-link">
                     Services

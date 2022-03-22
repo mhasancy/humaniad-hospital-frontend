@@ -1,3 +1,4 @@
+//imported file
 import CloseIcon from "@mui/icons-material/Close";
 import { Grid, Stack, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -13,7 +14,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
-import AllReviews from "../AllReviews/AllReviews";
+import ManageAppointment from "../ManageAppointment/ManageAppointment";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -53,8 +54,8 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const ReviewChecking = () => {
-  //destructuring data from useAuth
+//reviews adding component
+const ManageAppointments = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -66,25 +67,26 @@ const ReviewChecking = () => {
 
   const { firebaseContext, dataContext } = useAuth();
   const { user } = firebaseContext;
-  const { reviewsData, setReviewsData } = dataContext;
+  const { appointmentsData, setReviewsData } = dataContext;
   const { register, reset, handleSubmit } = useForm();
 
   //use hook form and email SignIn with context
   const onSubmitData = (inputData) => {
-    const { name, email, intro, rating } = inputData;
+    const { name, email, doctor, date, cell } = inputData;
 
     axios
-      .post("https://humaniad-hospital-backend.herokuapp.com/reviews", {
+      .post("https://humaniad-hospital-backend.herokuapp.com/appointments", {
         name,
         email,
-        intro,
-        rating: parseInt(rating),
+        doctor,
+        cell,
+        date,
         status: "pending",
       })
 
       .then((response) => {
         if (response?.data.acknowledged) {
-          alert("Review added successfully.");
+          alert("Appointment added successfully.");
           reset();
           handleClose();
         }
@@ -101,9 +103,9 @@ const ReviewChecking = () => {
         alignItems="center"
         spacing={2}
       >
-        <Typography variant="h4">All Reviews</Typography>
+        <Typography variant="h4">My Appointments</Typography>
         <Button variant="contained" onClick={handleClickOpen}>
-          Add Reviews
+          Add Appointments
         </Button>
       </Stack>
       <Box>
@@ -116,7 +118,7 @@ const ReviewChecking = () => {
             id="customized-dialog-title"
             onClose={handleClose}
           >
-            Add a Review
+            Add Appointments
           </BootstrapDialogTitle>
           <DialogContent dividers>
             <Box
@@ -154,27 +156,35 @@ const ReviewChecking = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    {...register("intro", { required: true })}
+                    {...register("cell", { required: true })}
                     required
                     fullWidth
-                    id="intro"
-                    label="Description"
-                    name="intro"
-                    multiline
-                    rows={2}
+                    id="cell"
+                    label="Cell"
+                    name="cell"
                   />
                 </Grid>
 
                 <Grid item xs={12}>
                   <TextField
-                    {...register("rating", { required: true })}
+                    {...register("doctor", { required: true })}
                     required
                     fullWidth
-                    name="rating"
-                    label="Review Score out of 5"
-                    type="number"
-                    id="rating"
-                    InputProps={{ inputProps: { min: 0, max: 5 } }}
+                    name="doctor"
+                    label="Doctor Name"
+                    type="text"
+                    id="doctor"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    {...register("date", { required: true })}
+                    required
+                    fullWidth
+                    name="date"
+                    label="Date"
+                    type="date"
+                    id="date"
                   />
                 </Grid>
               </Grid>
@@ -197,8 +207,9 @@ const ReviewChecking = () => {
           </DialogActions> */}
         </BootstrapDialog>
       </Box>
-      <AllReviews handleClickOpen={handleClickOpen} reviewsData={reviewsData} />
+      <ManageAppointment appointmentsData={appointmentsData} />
     </>
   );
 };
-export default ReviewChecking;
+
+export default ManageAppointments;

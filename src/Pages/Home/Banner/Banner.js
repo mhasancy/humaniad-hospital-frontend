@@ -72,14 +72,14 @@ const Banner = () => {
                 <p>EXTRA 20% OFF</p>
                 <h1 className="d-none d-md-block col-12 col-md-6 text-white fw-bold">
                   NEW <br />
-                  ARRIVALS
+                  TECHNOLOGY
                 </h1>
                 <h1
                   style={{ fontSize: "2.5rem" }}
                   className="d-block d-md-none col-12 col-md-6 text-white fw-bold"
                 >
                   NEW <br />
-                  ARRIVALS
+                  TECHNOLOGY
                 </h1>
                 <Box></Box>
                 <span className="text-start ">
@@ -107,13 +107,13 @@ const Banner = () => {
               <Box className="mt-5">
                 <p>EXTRA 20% OFF</p>
                 <h1 className="d-none d-md-block col-12 col-md-6 text-white fw-bold">
-                  EXCLUSIVE <br /> COLLECTION
+                  EXCLUSIVE <br /> MACHINE
                 </h1>
                 <h1
                   style={{ fontSize: "2.5rem" }}
                   className="d-block d-md-none col-12 col-md-6 text-white fw-bold"
                 >
-                  EXCLUSIVE <br /> COLLECTION
+                  EXCLUSIVE <br /> MACHINE
                 </h1>
                 <Box></Box>
                 <span className="text-start ">
@@ -140,13 +140,13 @@ const Banner = () => {
               <Box className="mt-5">
                 <p>EXTRA 20% OFF</p>
                 <h1 className="d-none d-md-block col-12 col-md-6 text-white fw-bold">
-                  SPRING <br /> COLLECTION
+                  QUALIFIED <br /> DOCTORS
                 </h1>
                 <h1
                   style={{ fontSize: "2.5rem" }}
                   className="d-block d-md-none col-12 col-md-6 text-white fw-bold"
                 >
-                  SPRING <br /> COLLECTION
+                  QUALIFIED <br /> DOCTORS
                 </h1>
                 <Box>
                   <Box></Box>

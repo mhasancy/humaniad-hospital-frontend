@@ -39,7 +39,7 @@ const ReviewOrder = () => {
   //data post to server
   const onSubmit = (data) => {
     axios
-      ?.post("http://localhost:5000//orders", {
+      ?.post("https://humaniad-hospital-backend.herokuapp.com//orders", {
         ...data,
         productTitle: matchedServices?.title,
         serviceId,

@@ -34,7 +34,7 @@ const Home = () => {
       <br />
       <Container>
         <Typography variant="h2" gutterBottom component="div">
-          Featured Watches For You
+          Featured
         </Typography>
         <Typography variant="h6" gutterBottom component="div">
           Today is the last day. Up to 30% off!

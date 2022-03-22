@@ -75,7 +75,7 @@ const AddingReview = () => {
     const { name, email, intro, rating } = inputData;
 
     axios
-      .post("http://localhost:5000/reviews", {
+      .post("https://humaniad-hospital-backend.herokuapp.com/reviews", {
         name,
         email,
         intro,

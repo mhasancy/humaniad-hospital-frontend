@@ -15,10 +15,9 @@ import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import AdminRoute from "../../UserAuthorize/AdminRoute/AdminRoute";
 import AddingReview from "../AddingReview/AddingReview";
-import Appointment from "../Appointment/Appointment";
 import DashboardHome from "../DashboardHome/DashboardHome";
 import DiscountMaintain from "../DiscountMaintain/DiscountMaintain";
-import ManageAppointment from "../ManageAppointment/ManageAppointment";
+import ManageAppointments from "../ManageAppointments/ManageAppointments";
 import MyAppointments from "../MyAppointments/MyAppointments";
 import Payment from "../Payment/Payment";
 import ReviewChecking from "../ReviewChecking/ReviewChecking";
@@ -89,17 +88,12 @@ const Dashboard = (props) => {
           </Link>
           <Link to={`${url}/my-appointments`}>
             <Button size="large" sx={{ width: "100%" }}>
-              <ListItem>My Appointment</ListItem>
+              <ListItem>Appointments</ListItem>
             </Button>
           </Link>
           <Link to={`${url}/add-reviews`}>
             <Button size="large" sx={{ width: "100%" }}>
               <ListItem>Add Reviews</ListItem>
-            </Button>
-          </Link>
-          <Link to={`${url}/appointment`}>
-            <Button size="large" sx={{ width: "100%" }}>
-              <ListItem>Make Appointment</ListItem>
             </Button>
           </Link>
         </>
@@ -207,16 +201,13 @@ const Dashboard = (props) => {
             <MyAppointments></MyAppointments>
           </Route>
           <AdminRoute path={`${path}/all-appointments`}>
-            <ManageAppointment></ManageAppointment>
+            <ManageAppointments></ManageAppointments>
           </AdminRoute>
           <AdminRoute path={`${path}/discount-maintain`}>
             <DiscountMaintain></DiscountMaintain>
           </AdminRoute>
           <Route path={`${path}/add-reviews`}>
             <AddingReview></AddingReview>
-          </Route>
-          <Route path={`${path}/appointment`}>
-            <Appointment></Appointment>
           </Route>
         </Switch>
       </Box>

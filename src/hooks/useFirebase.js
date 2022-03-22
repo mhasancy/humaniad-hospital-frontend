@@ -33,9 +33,13 @@ const useFirebase = () => {
 
   //admin check
   useEffect(() => {
-    axios.get(`http://localhost:5000/users/${user?.email}`).then((res) => {
-      setAdmin(res?.data.admin);
-    });
+    axios
+      .get(
+        `https://humaniad-hospital-backend.herokuapp.com/users/${user?.email}`
+      )
+      .then((res) => {
+        setAdmin(res?.data.admin);
+      });
   }, [user?.email]);
 
   //googleSignIn
@@ -82,22 +86,24 @@ const useFirebase = () => {
   };
   //users data load
   useEffect(() => {
-    axios.get("http://localhost:5000/users").then((res) => {
-      setUsersData(res?.data);
-    });
+    axios
+      .get("https://humaniad-hospital-backend.herokuapp.com/users")
+      .then((res) => {
+        setUsersData(res?.data);
+      });
   }, [user]);
   // users data saving to database
   const saveUser = (email, displayName, method) => {
     if (method === "post") {
       axios
-        .post("http://localhost:5000/users", {
+        .post("https://humaniad-hospital-backend.herokuapp.com/users", {
           email,
           displayName,
         })
         .then();
     } else if (method === "put") {
       axios
-        .put("http://localhost:5000/users", {
+        .put("https://humaniad-hospital-backend.herokuapp.com/users", {
           email,
           displayName,
         })

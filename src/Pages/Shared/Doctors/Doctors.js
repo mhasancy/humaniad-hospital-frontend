@@ -18,19 +18,12 @@ const Doctors = () => {
     <>
       <Header></Header>
       <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
       <Container>
         <Typography variant="h2" gutterBottom component="div">
-          Pick your Watch
+          Our Experts Doctors
         </Typography>
-        <Typography variant="h6" gutterBottom component="div">
-          When it comes to exploring exotic places, the choices are numerous.
-          Whether you like peaceful destinations or vibrant landscapes, we have
-          offers for you.
-        </Typography>
+
         <br />
         <Box sx={{ flexGrow: 1 }}>
           <Grid
@@ -39,7 +32,7 @@ const Doctors = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {doctorsData?.map((doctorData) => (
-              <Doctor key={doctorData?._id} productData={doctorData}></Doctor>
+              <Doctor key={doctorData?._id} doctorData={doctorData}></Doctor>
             ))}
           </Grid>
         </Box>

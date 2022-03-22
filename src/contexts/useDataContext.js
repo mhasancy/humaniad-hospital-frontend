@@ -7,7 +7,7 @@ const useDataContext = () => {
   //data state for CRUD operations
   const [servicesData, setServicesData] = useState([]);
   const [blogsData, setBlogsData] = useState([]);
-  const [ordersData, setOrdersData] = useState([]);
+  const [appointmentsData, setAppointmentsData] = useState([]);
   const [doctorsData, setDoctorsData] = useState([]);
   const [error, setError] = useState("");
   const [orderStatus, setOrderStatus] = useState("Pending");
@@ -15,18 +15,20 @@ const useDataContext = () => {
   const [reviewStatus, setReviewStatus] = useState("pending");
 
   //delete users order
-  const deleteOrder = (_id) => {
+  const deleteAppointment = (_id) => {
     const confirmation = window.confirm("Are you sure you want to delete?");
     if (confirmation) {
       axios
-        .delete(`http://localhost:5000/orders/${_id}`)
+        .delete(
+          `https://humaniad-hospital-backend.herokuapp.com/appointments/${_id}`
+        )
         .then((response) => {
           if (response.data.deletedCount > 0) {
-            const remainingOrders = ordersData.filter(
-              (order) => order?._id === _id
+            const remainingAppointments = appointmentsData.filter(
+              (appointment) => appointment?._id === _id
             );
-            setOrdersData(remainingOrders);
-            alert("Order deleted successfully.");
+            setAppointmentsData(remainingAppointments);
+            alert("Order Appointment successfully.");
           }
         })
         .catch((error) => setError(error));
@@ -37,7 +39,9 @@ const useDataContext = () => {
     const confirmation = window.confirm("Are you sure you want to delete?");
     if (confirmation) {
       axios
-        .delete(`http://localhost:5000/reviews/${_id}`)
+        .delete(
+          `https://humaniad-hospital-backend.herokuapp.com/reviews/${_id}`
+        )
         .then((response) => {
           if (response.data.deletedCount > 0) {
             const remainingReviews = reviewsData.filter(
@@ -56,7 +60,9 @@ const useDataContext = () => {
     const confirmation = window.confirm("Are you sure you want to delete?");
     if (confirmation) {
       axios
-        .delete(`http://localhost:5000/products/${_id}`)
+        .delete(
+          `https://humaniad-hospital-backend.herokuapp.com/products/${_id}`
+        )
         .then((response) => {
           if (response.data.deletedCount > 0) {
             const remainingServices = servicesData.filter(
@@ -73,7 +79,7 @@ const useDataContext = () => {
   //handle status change to approved
   const handleStatusUpdateReview = (_id) => {
     axios
-      .put(`http://localhost:5000/reviews/${_id}`, {
+      .put(`https://humaniad-hospital-backend.herokuapp.com/reviews/${_id}`, {
         status: "approved",
       })
       .then((response) => {
@@ -87,7 +93,7 @@ const useDataContext = () => {
   //services data load
   useEffect(() => {
     axios
-      .get("http://localhost:5000/services")
+      .get("https://humaniad-hospital-backend.herokuapp.com/services")
       .then((response) => setServicesData(response?.data))
       .catch((error) => setError(error));
   }, []);
@@ -95,22 +101,22 @@ const useDataContext = () => {
   //review data load
   useEffect(() => {
     axios
-      .get("http://localhost:5000/reviews")
+      .get("https://humaniad-hospital-backend.herokuapp.com/reviews")
       .then((response) => setReviewsData(response?.data))
       .catch((error) => setError(error));
   }, [reviewsData]);
   //review data load
   useEffect(() => {
     axios
-      .get("http://localhost:5000/doctors")
+      .get("https://humaniad-hospital-backend.herokuapp.com/doctors")
       .then((response) => setDoctorsData(response?.data))
       .catch((error) => setError(error));
-  }, []);
+  }, [doctorsData]);
 
   //blogs data load
   useEffect(() => {
     axios
-      .get("http://localhost:5000/blogs")
+      .get("https://humaniad-hospital-backend.herokuapp.com/blogs")
       .then((response) => setBlogsData(response?.data))
       .catch((error) => setError(error));
   }, []);
@@ -118,16 +124,16 @@ const useDataContext = () => {
   // order data load
   useEffect(() => {
     axios
-      .get("http://localhost:5000/orders")
-      .then((response) => setOrdersData(response?.data))
+      .get("https://humaniad-hospital-backend.herokuapp.com/appointments")
+      .then((response) => setAppointmentsData(response?.data))
       .catch((error) => setError(error));
-  }, [ordersData]);
+  }, [appointmentsData]);
 
   return {
     servicesData,
-    ordersData,
+    appointmentsData,
     blogsData,
-    deleteOrder,
+    deleteAppointment,
     handleStatusUpdateReview,
     orderStatus,
     error,

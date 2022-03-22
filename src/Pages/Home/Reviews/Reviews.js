@@ -22,7 +22,6 @@ const Reviews = () => {
   const approvedReviews = reviewsData?.filter(
     (approvedReviewsData) => approvedReviewsData?.status === "approved"
   );
-  console.log(approvedReviews);
 
   return (
     <Container>
