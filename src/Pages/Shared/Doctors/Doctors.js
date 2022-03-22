@@ -7,13 +7,13 @@ import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import Footer from "../../Home/Footer/Footer";
 import Header from "../../Home/Header/Header";
-import Product from "../Product/Product";
+import Doctor from "../Doctor/Doctor";
 
 //Products component
-const Products = () => {
+const Doctors = () => {
   //destructuring data set
   const { dataContext } = useAuth();
-  const { productsData } = dataContext;
+  const { doctorsData } = dataContext;
   return (
     <>
       <Header></Header>
@@ -38,11 +38,8 @@ const Products = () => {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {productsData?.map((productData) => (
-              <Product
-                key={productData?._id}
-                productData={productData}
-              ></Product>
+            {doctorsData?.map((doctorData) => (
+              <Doctor key={doctorData?._id} productData={doctorData}></Doctor>
             ))}
           </Grid>
         </Box>
@@ -55,4 +52,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Doctors;

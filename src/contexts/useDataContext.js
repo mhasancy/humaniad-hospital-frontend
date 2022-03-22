@@ -8,16 +8,18 @@ const useDataContext = () => {
   const [servicesData, setServicesData] = useState([]);
   const [blogsData, setBlogsData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
+  const [doctorsData, setDoctorsData] = useState([]);
   const [error, setError] = useState("");
   const [orderStatus, setOrderStatus] = useState("Pending");
   const [reviewsData, setReviewsData] = useState([]);
+  const [reviewStatus, setReviewStatus] = useState("pending");
 
   //delete users order
   const deleteOrder = (_id) => {
     const confirmation = window.confirm("Are you sure you want to delete?");
     if (confirmation) {
       axios
-        .delete(`https://quiet-cliffs-65550.herokuapp.com/orders/${_id}`)
+        .delete(`http://localhost:5000/orders/${_id}`)
         .then((response) => {
           if (response.data.deletedCount > 0) {
             const remainingOrders = ordersData.filter(
@@ -30,13 +32,31 @@ const useDataContext = () => {
         .catch((error) => setError(error));
     }
   };
+  //delete users order
+  const deleteReviews = (_id) => {
+    const confirmation = window.confirm("Are you sure you want to delete?");
+    if (confirmation) {
+      axios
+        .delete(`http://localhost:5000/reviews/${_id}`)
+        .then((response) => {
+          if (response.data.deletedCount > 0) {
+            const remainingReviews = reviewsData.filter(
+              (review) => review?._id === _id
+            );
+            setReviewsData(remainingReviews);
+            alert("Review deleted successfully.");
+          }
+        })
+        .catch((error) => setError(error));
+    }
+  };
 
   //delete products data
   const deleteProduct = (_id) => {
     const confirmation = window.confirm("Are you sure you want to delete?");
     if (confirmation) {
       axios
-        .delete(`https://quiet-cliffs-65550.herokuapp.com/products/${_id}`)
+        .delete(`http://localhost:5000/products/${_id}`)
         .then((response) => {
           if (response.data.deletedCount > 0) {
             const remainingServices = servicesData.filter(
@@ -51,14 +71,14 @@ const useDataContext = () => {
   };
 
   //handle status change to approved
-  const handleStatusUpdate = (_id) => {
+  const handleStatusUpdateReview = (_id) => {
     axios
-      .put(`https://quiet-cliffs-65550.herokuapp.com/orders/${_id}`, {
-        status: "Shipped",
+      .put(`http://localhost:5000/reviews/${_id}`, {
+        status: "approved",
       })
       .then((response) => {
         if (response.data.modifiedCount > 0) {
-          setOrderStatus("Shipped");
+          setReviewStatus("approved");
         }
       })
       .catch((error) => setError(error));
@@ -67,9 +87,7 @@ const useDataContext = () => {
   //services data load
   useEffect(() => {
     axios
-      .get(
-        "https://raw.githubusercontent.com/mhasancy/test/main/serviceData.json"
-      )
+      .get("http://localhost:5000/services")
       .then((response) => setServicesData(response?.data))
       .catch((error) => setError(error));
   }, []);
@@ -77,15 +95,22 @@ const useDataContext = () => {
   //review data load
   useEffect(() => {
     axios
-      .get("https://quiet-cliffs-65550.herokuapp.com/reviews")
+      .get("http://localhost:5000/reviews")
       .then((response) => setReviewsData(response?.data))
+      .catch((error) => setError(error));
+  }, [reviewsData]);
+  //review data load
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/doctors")
+      .then((response) => setDoctorsData(response?.data))
       .catch((error) => setError(error));
   }, []);
 
   //blogs data load
   useEffect(() => {
     axios
-      .get("https://quiet-cliffs-65550.herokuapp.com/blogs")
+      .get("http://localhost:5000/blogs")
       .then((response) => setBlogsData(response?.data))
       .catch((error) => setError(error));
   }, []);
@@ -93,7 +118,7 @@ const useDataContext = () => {
   // order data load
   useEffect(() => {
     axios
-      .get("https://quiet-cliffs-65550.herokuapp.com/orders")
+      .get("http://localhost:5000/orders")
       .then((response) => setOrdersData(response?.data))
       .catch((error) => setError(error));
   }, [ordersData]);
@@ -103,11 +128,14 @@ const useDataContext = () => {
     ordersData,
     blogsData,
     deleteOrder,
-    handleStatusUpdate,
+    handleStatusUpdateReview,
     orderStatus,
     error,
     reviewsData,
     deleteProduct,
+    doctorsData,
+    setReviewsData,
+    deleteReviews,
   };
 };
 

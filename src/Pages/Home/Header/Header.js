@@ -8,7 +8,7 @@ import "../../../index.css";
 const Header = () => {
   const { firebaseContext } = useAuth();
   //destructuring
-  const { user, logOut } = firebaseContext;
+  const { user, logOut, admin } = firebaseContext;
   const navItemCol = {
     color: "rgb(54, 201, 95)",
   };
@@ -43,6 +43,38 @@ const Header = () => {
                     to="/dashboard"
                   >
                     Dashboard
+                  </NavLink>
+                </li>
+                {user?.email && !admin && (
+                  <li style={navItemCol} className="nav-item">
+                    <NavLink to="/dashboard" className="nav-link">
+                      Appointment
+                    </NavLink>
+                  </li>
+                )}
+                <li style={navItemCol} className="nav-item">
+                  <NavLink to="/department" className="nav-link">
+                    Department
+                  </NavLink>
+                </li>
+                <li style={navItemCol} className="nav-item">
+                  <NavLink to="/services" className="nav-link">
+                    Services
+                  </NavLink>
+                </li>
+                <li style={navItemCol} className="nav-item nav-dict">
+                  <NavLink to="/doctors" className="nav-link">
+                    Doctors
+                  </NavLink>
+                </li>
+                <li style={navItemCol} className="nav-item nav-dict">
+                  <NavLink to="/research" className="nav-link">
+                    Research
+                  </NavLink>
+                </li>
+                <li style={navItemCol} className="nav-item nav-dict">
+                  <NavLink to="/about" className="nav-link">
+                    About
                   </NavLink>
                 </li>
                 <li style={navItemCol} className="nav-item">

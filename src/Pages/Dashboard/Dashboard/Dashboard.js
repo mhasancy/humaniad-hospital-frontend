@@ -15,13 +15,10 @@ import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import AdminRoute from "../../UserAuthorize/AdminRoute/AdminRoute";
 import AddingReview from "../AddingReview/AddingReview";
-import AddingServices from "../AddingServices/AddingServices";
 import Appointment from "../Appointment/Appointment";
 import DashboardHome from "../DashboardHome/DashboardHome";
 import DiscountMaintain from "../DiscountMaintain/DiscountMaintain";
-import MakeAdmin from "../MakeAdmin/MakeAdmin";
 import ManageAppointment from "../ManageAppointment/ManageAppointment";
-import ManageServices from "../ManageServices/ManageServices";
 import MyAppointments from "../MyAppointments/MyAppointments";
 import Payment from "../Payment/Payment";
 import ReviewChecking from "../ReviewChecking/ReviewChecking";
@@ -63,26 +60,12 @@ const Dashboard = (props) => {
       </Link>
       {admin && (
         <>
-          <Link to={`${url}/make-admin`}>
-            <Button size="large" sx={{ width: "100%" }}>
-              <ListItem>Make Admin</ListItem>
-            </Button>
-          </Link>
           <Link to={`${url}/all-appointments`}>
             <Button size="large" sx={{ width: "100%" }}>
               <ListItem>Appointments</ListItem>
             </Button>
           </Link>
-          <Link to={`${url}/add-services`}>
-            <Button size="large" sx={{ width: "100%" }}>
-              <ListItem>Add Services</ListItem>
-            </Button>
-          </Link>
-          <Link to={`${url}/manage-services`}>
-            <Button size="large" sx={{ width: "100%" }}>
-              <ListItem>Manage Services</ListItem>
-            </Button>
-          </Link>
+
           <Link to={`${url}/review-checking`}>
             <Button size="large" sx={{ width: "100%" }}>
               <ListItem>Checking Reviews </ListItem>
@@ -116,7 +99,7 @@ const Dashboard = (props) => {
           </Link>
           <Link to={`${url}/appointment`}>
             <Button size="large" sx={{ width: "100%" }}>
-              <ListItem>Appointment</ListItem>
+              <ListItem>Make Appointment</ListItem>
             </Button>
           </Link>
         </>
@@ -212,18 +195,11 @@ const Dashboard = (props) => {
           <Route exact path={path}>
             <DashboardHome />
           </Route>
-          <AdminRoute path={`${path}/make-admin`}>
-            <MakeAdmin></MakeAdmin>
-          </AdminRoute>
-          <AdminRoute path={`${path}/add-services`}>
-            <AddingServices></AddingServices>
-          </AdminRoute>
+
           <AdminRoute path={`${path}/review-checking`}>
             <ReviewChecking></ReviewChecking>
           </AdminRoute>
-          <AdminRoute path={`${path}/manage-services`}>
-            <ManageServices></ManageServices>
-          </AdminRoute>
+
           <Route path={`${path}/payment`}>
             <Payment></Payment>
           </Route>

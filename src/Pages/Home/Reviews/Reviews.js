@@ -19,6 +19,10 @@ const Reviews = () => {
   //destructuring
   const { dataContext } = useAuth();
   const { reviewsData } = dataContext;
+  const approvedReviews = reviewsData?.filter(
+    (approvedReviewsData) => approvedReviewsData?.status === "approved"
+  );
+  console.log(approvedReviews);
 
   return (
     <Container>
@@ -44,7 +48,7 @@ const Reviews = () => {
           modules={[Autoplay, Pagination, Navigation]}
           className="mySwiper"
         >
-          {reviewsData?.map((reviewData) => (
+          {approvedReviews?.map((reviewData) => (
             <SwiperSlide key={reviewData?._id}>
               {" "}
               <Review key={reviewData?._id} reviewData={reviewData}></Review>

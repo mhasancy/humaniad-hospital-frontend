@@ -36,6 +36,7 @@ const SignUp = () => {
 
   const onSubmitData = (inputData) => {
     const { name, email, password } = inputData;
+    console.log(inputData);
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
     } else {

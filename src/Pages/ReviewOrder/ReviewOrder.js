@@ -30,16 +30,16 @@ const ReviewOrder = () => {
   const { dataContext, firebaseContext } = useAuth();
   const { user } = firebaseContext;
   const { servicesData } = dataContext;
-
+  console.log(servicesData);
   //matched order
   const matchedServices = servicesData?.find(
-    (ServiceData) => ServiceData?.id === serviceId
+    (serviceData) => serviceData?._id === serviceId
   );
-  console.log(matchedServices);
+  // console.log(matchedServices);
   //data post to server
   const onSubmit = (data) => {
     axios
-      ?.post("https://quiet-cliffs-65550.herokuapp.com/orders", {
+      ?.post("http://localhost:5000//orders", {
         ...data,
         productTitle: matchedServices?.title,
         serviceId,
@@ -82,7 +82,7 @@ const ReviewOrder = () => {
             alignItems="center"
           >
             <Grid item xs={8} md={4} sx={{ mx: "auto" }}>
-              <Card sx={{ maxWidth: 400, textAlign: "center", height: 500 }}>
+              <Card sx={{ maxWidth: 400, textAlign: "center" }}>
                 <CardMedia
                   component="img"
                   height="300"
@@ -93,12 +93,8 @@ const ReviewOrder = () => {
                   <Typography gutterBottom variant="h5" component="div">
                     {matchedServices?.title}
                   </Typography>
-                  <Typography
-                    sx={{ height: 50 }}
-                    variant="body2"
-                    color="text.secondary"
-                  >
-                    {matchedServices?.intro?.slice(0, 100)}
+                  <Typography variant="body2" color="text.secondary">
+                    {matchedServices?.description}
                   </Typography>
                   <Grid
                     container

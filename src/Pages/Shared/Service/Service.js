@@ -7,7 +7,7 @@ const Service = ({ serviceData }) => {
   //destructuring useAuth
 
   //destructuring props
-  const { id, title, intro, image } = serviceData;
+  const { _id, title, intro, image } = serviceData;
   return (
     <div className="col container" id="services">
       <div
@@ -20,7 +20,7 @@ const Service = ({ serviceData }) => {
           <p style={{ height: "100px" }} className="card-text">
             {intro.slice(0, 100)}
           </p>
-          <Link to={`/review-order/${id}`}>
+          <Link to={`/review-order/${_id}`}>
             <button className="btn btn-primary gradient-btn rounded-pill px-3 rounded-pill fw-bold px-3 gradient-btn">
               <i className="far fa-bookmark"></i> Book Now
             </button>

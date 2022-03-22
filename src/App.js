@@ -8,7 +8,8 @@ import Home from "./Pages/Home/Home/Home";
 import Research from "./Pages/Home/Research/Research";
 import NotFound from "./Pages/NotFound/NotFound";
 import ReviewOrder from "./Pages/ReviewOrder/ReviewOrder";
-import Products from "./Pages/Shared/Products/Products";
+import Doctors from "./Pages/Shared/Doctors/Doctors";
+import Services from "./Pages/Shared/Services/Services";
 import Login from "./Pages/UserAuthorize/Login/Login";
 import PrivateRoute from "./Pages/UserAuthorize/PrivateRoute/PrivateRoute";
 import SignUp from "./Pages/UserAuthorize/SignUp/SignUp";
@@ -28,17 +29,17 @@ function App() {
             <PrivateRoute exact path="/review-order/:serviceId">
               <ReviewOrder></ReviewOrder>
             </PrivateRoute>
-            <PrivateRoute exact path="/appointment">
-              <Dashboard></Dashboard>
-            </PrivateRoute>
-            <Route exact path="/products">
-              <Products></Products>
-            </Route>
             <Route exact path="/research">
               <Research></Research>
             </Route>
+            <Route exact path="/doctors">
+              <Doctors></Doctors>
+            </Route>
             <Route exact path="/about">
               <About></About>
+            </Route>
+            <Route exact path="/services">
+              <Services></Services>
             </Route>
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>

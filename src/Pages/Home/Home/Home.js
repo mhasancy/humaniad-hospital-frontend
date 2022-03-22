@@ -1,9 +1,20 @@
 //imported file
-import { Container, Grid, Typography } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Rating,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import Services from "../../Shared/Services/Services";
 import Banner from "../Banner/Banner";
 import Blogs from "../Blogs/Blogs";
 import Footer from "../Footer/Footer";
@@ -14,7 +25,7 @@ import Reviews from "../Reviews/Reviews";
 const Home = () => {
   //destructuring
   const { dataContext } = useAuth();
-  const { productsData } = dataContext;
+  const { servicesData } = dataContext;
   return (
     <div>
       <Header></Header>
@@ -35,7 +46,60 @@ const Home = () => {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            <Services />
+            {servicesData
+              .slice(0, 6)
+              .map(({ _id, title, intro, image, rating }) => {
+                return (
+                  <Grid key={_id} item xs={8} md={4} sx={{ mx: "auto" }}>
+                    <Card
+                      sx={{ maxWidth: 400, textAlign: "center", height: 530 }}
+                    >
+                      <CardMedia
+                        component="img"
+                        height="300"
+                        image={image}
+                        alt=""
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {title}
+                        </Typography>
+                        <Typography
+                          sx={{ height: 50 }}
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          {intro?.slice(0, 100)}
+                        </Typography>
+                        <Grid
+                          container
+                          direction="row"
+                          justifyContent="space-around"
+                          alignItems="center"
+                          pt={1.5}
+                        >
+                          {/* <Typography variant="h6" component="div">
+                            $ {price}
+                          </Typography> */}
+                          <Rating name="read-only" value={rating} readOnly />
+                        </Grid>
+                      </CardContent>
+                      <CardActions>
+                        <Box sx={{ mx: "auto" }}>
+                          {" "}
+                          <Link to={`/review-order/${_id}`}>
+                            {" "}
+                            <Button variant="contained" size="small">
+                              <ShoppingCartIcon />
+                              Order Now
+                            </Button>
+                          </Link>
+                        </Box>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              })}
           </Grid>
         </Box>
       </Container>

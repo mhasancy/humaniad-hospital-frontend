@@ -33,11 +33,9 @@ const useFirebase = () => {
 
   //admin check
   useEffect(() => {
-    axios
-      .get(`https://quiet-cliffs-65550.herokuapp.com/users/${user?.email}`)
-      .then((res) => {
-        setAdmin(res?.data.admin);
-      });
+    axios.get(`http://localhost:5000/users/${user?.email}`).then((res) => {
+      setAdmin(res?.data.admin);
+    });
   }, [user?.email]);
 
   //googleSignIn
@@ -84,7 +82,7 @@ const useFirebase = () => {
   };
   //users data load
   useEffect(() => {
-    axios.get("https://quiet-cliffs-65550.herokuapp.com/users").then((res) => {
+    axios.get("http://localhost:5000/users").then((res) => {
       setUsersData(res?.data);
     });
   }, [user]);
@@ -92,14 +90,14 @@ const useFirebase = () => {
   const saveUser = (email, displayName, method) => {
     if (method === "post") {
       axios
-        .post("https://quiet-cliffs-65550.herokuapp.com/users", {
+        .post("http://localhost:5000/users", {
           email,
           displayName,
         })
         .then();
     } else if (method === "put") {
       axios
-        .put("https://quiet-cliffs-65550.herokuapp.com/users", {
+        .put("http://localhost:5000/users", {
           email,
           displayName,
         })
